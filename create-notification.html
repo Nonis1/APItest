@@ -1,52 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create SAP Notification</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create SAP Notification</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+    }
+    h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #1a1a1a;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 1rem;
+      background-color: #f9f9f9;
+      transition: box-shadow 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #007aff50;
+      background-color: white;
+    }
+    .submit-btn {
+      background: #007aff;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 24px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    .submit-btn:hover {
+      background: #005ecb;
+    }
+    .message {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      font-weight: 500;
+      text-align: center;
+      transition: opacity 0.4s ease;
+    }
+    .success {
+      background-color: #d4f6df;
+      color: #16734f;
+    }
+    .error {
+      background-color: #fce4e4;
+      color: #a02020;
+    }
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #007aff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Create SAP Notification</h1>
-        <a href="index.html" class="back-link">&larr; Back to Messages</a>
-
-        <form id="notificationForm">
-            <div class="form-group">
-                <label for="equipment">Equipment*</label>
-                <select id="equipment" name="equipment" required>
-                    <option value="">Loading equipment...</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="funcLoc">Functional Location*</label>
-                <select id="funcLoc" name="funcLoc" required>
-                    <option value="">Loading locations...</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="priority">Priority*</label>
-                <select id="priority" name="priority" required>
-                    <option value="1">High</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Low</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description*</label>
-                <textarea id="description" name="description" rows="4" required
-                    placeholder="Enter notification description"></textarea>
-            </div>
-
-            <div id="message" class="message hidden"></div>
-
-            <button type="submit" class="submit-btn">Create Notification</button>
-        </form>
-    </div>
-
-    <script src="notification.js" defer></script>
+  <div class="container">
+    <a class="back-link" href="index.html">← Back to Home</a>
+    <h1>Create SAP Notification</h1>
+    <form id="notificationForm">
+      <div class="form-group">
+        <label for="equipment">Equipment:</label>
+        <select id="equipment" required></select>
+      </div>
+      <div class="form-group">
+        <label for="funcLoc">Functional Location:</label>
+        <select id="funcLoc" required></select>
+      </div>
+      <div class="form-group">
+        <label for="priority">Priority:</label>
+        <select id="priority" required>
+          <option value="1">High</option>
+          <option value="2">Medium</option>
+          <option value="3">Low</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" id="description" placeholder="Notification Description" required />
+      </div>
+      <button class="submit-btn" type="submit">Submit Notification</button>
+    </form>
+    <div id="responseMsg" class="message hidden"></div>
+  </div>
+  <script src="notification.js"></script>
 </body>
 </html>
