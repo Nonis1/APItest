@@ -2,14 +2,37 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Enable CORS for all origins during development
+// Enable CORS with more specific configuration
 app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST']
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://apitest.vercel.app', 'http://localhost:3000'] 
+    : '*',
+  methods: ['GET', 'POST'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Parse JSON bodies
 app.use(express.json());
+
+// Basic authentication middleware
+const authenticate = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Authentication required' });
+  }
+
+  // For basic auth, header should be: 'Basic base64(username:password)'
+  if (authHeader.startsWith('Basic ')) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Invalid authentication method' });
+  }
+};
+
+// Apply authentication middleware to all routes
+app.use(authenticate);
 
 // Your existing routes
 app.post('/api/messages', (req, res) => {
@@ -26,6 +49,17 @@ app.post('/api/messages', (req, res) => {
   
   // Send response
   res.status(201).json(newMessage);
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 module.exports = app;
