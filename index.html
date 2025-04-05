@@ -3,38 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Message App</title>
+    <title>Polling API Message App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>API Message App</h1>
+        <h1>Polling API Message App</h1>
+
+        <form id="messageForm">
+            <input type="text" id="messageInput" placeholder="Enter your message" />
+            <button type="submit">Send Message</button>
+        </form>
+
         <div class="message-container">
-            <div id="message-display">Loading messages...</div>
+            <h2>Latest Message:</h2>
+            <div id="messages">(No messages yet)</div>
         </div>
+
         <div id="loading" class="hidden">Loading...</div>
         <div id="error" class="hidden">Error fetching message. Please try again.</div>
-        
+
         <div class="postman-instructions">
             <h2>How to Call the API from Postman</h2>
             <ol>
                 <li><strong>Open Postman</strong> and create a new request</li>
-                <li><strong>Set the request type</strong> to GET</li>
-                <li><strong>Enter the URL:</strong> <code>https://jsonplaceholder.typicode.com/posts/1</code></li>
+                <li><strong>Set the request type</strong> to POST or GET</li>
+                <li><strong>Enter your API URL</strong>, for example: <code>https://your-api-url/api/messages</code></li>
+                <li><strong>Add Basic Auth credentials:</strong> username <code>admin</code>, password <code>password123</code></li>
+                <li><strong>For POST requests</strong>, set the body to <code>{"text": "Your message"}</code></li>
                 <li><strong>Click Send</strong> to execute the request</li>
-                <li><strong>View the response</strong> in the body section below</li>
             </ol>
-            <p>The response will be a JSON object containing:</p>
+            <p>Response example:</p>
             <pre class="code-block">
 {
-  "userId": 1,
-  "id": 1,
-  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+  "text": "Your message",
+  "timestamp": "2025-04-05T15:06:04.686Z"
 }
             </pre>
-            <p>This is the same API endpoint that this web application uses to fetch the message.</p>
         </div>
+
     </div>
     <script src="app.js"></script>
 </body>
