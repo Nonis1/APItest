@@ -9,6 +9,9 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/server.js" },
     { "src": "/ws", "dest": "/server.js" },
+    { "src": "/(.*\\.js)", "dest": "/$1" },
+    { "src": "/(.*\\.css)", "dest": "/$1" },
+    { "src": "/(.*\\.html)", "dest": "/$1" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
