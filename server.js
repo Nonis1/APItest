@@ -36,15 +36,21 @@ app.use(authenticate);
 // ✅ POST to save message
 app.post('/api/messages', (req, res) => {
   const { text } = req.body;
-  if (!text) return res.status(400).json({ error: 'Message text is required' });
+
+  if (!text) {
+    return res.status(400).json({ error: 'Message text is required' });
+  }
+
+  const responseMessage = `I got it: ${text}`; // 👈 add this line
 
   lastMessage = {
-    text,
+    text: responseMessage,
     timestamp: new Date().toISOString()
   };
 
-  res.status(201).json(lastMessage);
+  res.status(201).json(lastMessage); // 👈 response includes formatted text
 });
+
 
 // ✅ GET latest message
 app.get('/api/messages', (req, res) => {
