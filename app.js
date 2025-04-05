@@ -13,8 +13,8 @@ function fetchLatestMessage() {
   })
     .then(res => res.ok ? res.json() : Promise.reject('No messages yet'))
     .then(data => {
-      document.getElementById('messages').textContent =
-        `${data.text} — ${new Date(data.timestamp).toLocaleTimeString()}`;
+        document.getElementById('messages').textContent = `${data.text} — ${new Date(data.timestamp).toLocaleTimeString()}`;
+
     })
     .catch(() => {
       document.getElementById('messages').textContent = '(No messages yet)';
